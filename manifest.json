@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+
+  "name": "Chatango Extension",
+  "description": "Extend Chatango",
+  "version": "0.3",
+  "applications": {
+    "gecko": {
+      "id": "chatangoexpansion@educhan.net.br"
+    }
+  },
+  "content_scripts": [{
+    "matches": [ "*://*.chatango.com/*" ],
+    "exclude_matches": [ "*://st.chatango.com/styles/grp.css*" ],
+    "all_frames": true,
+    "run_at": "document_start",
+    "js": [ "src/reset-env.js" ],
+    "css": [ "styles/reset.css" ]
+  }, {
+    "matches": [ "*://st.chatango.com/styles/grp.css*" ],
+    "all_frames": true,
+    "run_at": "document_start",
+    "js": [ "src/loader.js" ],
+    "css": [
+      "styles/reset.css",
+      "styles/grp.css"
+    ]
+  }],
+  "permissions": [
+    "cookies",
+    "storage",
+    "https://rawgit.com/EduardoRFS/ChatangoExpansion/*"
+  ],
+  "content_security_policy": "script-src 'self' https://rawgit.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "assets/favicon.png",
+    "default_popup": "popup_loader.html"
+  },
+  "web_accessible_resources": ["src/**", "libs/**", "chattanga/**", "mods/**"]
+}
